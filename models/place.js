@@ -9,9 +9,18 @@ const Place = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    sport:{
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Sport'
-  },
+  reviews:[{
+    text: {
+        type:String,
+        required:true
+    },
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    createdAt: {
+        type: Date,
+    }
+}]
 });
 module.exports = mongoose.model("Place", Place);

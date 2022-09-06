@@ -1,8 +1,18 @@
 const mongoose = require('mongoose');
 const Slot = mongoose.Schema({
 
-    startTime: {type:Number, required:true},
-    endTime: {type:Number, required:true},
+    date: {
+        type:String, 
+        required:true
+    },
+    startTime: {
+        type:String,
+        required:true
+    },
+    endTime: {
+        type:String,
+        required:true
+    },
     is_booked : {
         type: Boolean,
         default: false,
@@ -15,6 +25,15 @@ const Slot = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Place'
     },
+    place_name:{
+        type: String,
+        required: true,
+    },
+    sport:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Sport'
+    },
+   
 });
 
-const Booking = mongoose.model('Slot', Slot);
+module.exports = mongoose.model("Slot", Slot);

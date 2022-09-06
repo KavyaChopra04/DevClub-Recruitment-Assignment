@@ -7,11 +7,13 @@ function Profile() {
     let navigate=useNavigate();
     let {id}=useParams();
     const [username, setUsername]=useState("")
+    const [email, setEmail]=useState("")
     const [Slotarr, setSlotarr]=useState([])
     useEffect(() => {
-      axios.get(`http://localhost:3001/users/basicinfo/${id}`).then((response) => {
-        setUsername(response.data.username);
-      })
+      axios.get(`http://localhost:3001/users/bytoken/${localStorage.getItem("accessToken")}`).then((response)=>{
+      setUsername(response.data.username);
+      setEmail(response.data.email)
+    })
       axios.get(`http://localhost:3001/slots/byuserId/${id}`).then((response) => {
        
         setSlotarr(response.data);
@@ -22,14 +24,15 @@ function Profile() {
     <div className="profilepage">Profile Page
     <div className="basicinfo">
         <h1>Username: {username}</h1>
+        <h2>email: {email}</h2>
     </div>
-    <div>List of this user's slots booked:</div>
+    <div><h2>List of this user's slots booked:</h2></div>
     <div>
       {Slotarr.map((value, key)=>{
         return (
-        <div className='slot' onClick={()=>{navigate(`/post/${value.id}`)}}>
-        <div className='title'>Slot booked from {value.startTime} to {value.endTime} for {value.sportBooked.name} at {value.Place.name}</div>
-        
+        <div className='slot'>
+        <div className='title'>Slot booked from {value.startTime} to {value.endTime} at {value.place_name}</div>
+        <br></br>
         </div>)
       })}
     </div>

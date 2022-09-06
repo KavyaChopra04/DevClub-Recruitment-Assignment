@@ -23,12 +23,6 @@ const User = new mongoose.Schema({
       type: Boolean,
       default: false
     },
-    slots_booked: [{
-      type: Date,
-      slots : [
-        { type: mongoose.Schema.Types.ObjectId, ref: 'Slot' }
-      ]
-    }]
 
   });
 User.pre("save", async function(next) { //pre-save password hashing
