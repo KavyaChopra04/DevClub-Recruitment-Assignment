@@ -13,6 +13,7 @@ import {AuthContext} from './helpers/AuthContext';
 import {useState} from "react";
 import AddPlace from './pages/AddPlace';
 import Place from './pages/Place';
+import Search from './Search';
 function App() {
     const [AuthState, setAuthState]=useState(false);
     console.log("authstate is ", AuthState);

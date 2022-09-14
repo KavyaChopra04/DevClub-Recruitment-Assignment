@@ -35,7 +35,7 @@ const initialValues={
   count: "", 
 };
 const initialValuesSlot={
-  date: "06-09-2022",
+  date: "14-09-2022",
   startTime: "16:30",
   endTime: "16:30",
   place:"Cricket Ground",

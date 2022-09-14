@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
+
 function Home() {
     const [Sportsarr, fillarr] = useState([]);
     const [Placesarr, setPlacesarr] = useState([]);
@@ -19,9 +20,15 @@ function Home() {
     }
       
   };
+  function custom_sort(a, b) {
+    return a.name-b.name;
+    //sorts keeping newest arrivals first
+} 
   useEffect(()=>{
     axios.get("http://localhost:3001/sports").then((response)=>{
-      fillarr(response.data);
+      const nobj=response.data;
+      nobj.sort(custom_sort);
+      fillarr(nobj);
       redirect();
     })
     axios.get("http://localhost:3001/places").then((response)=>{
@@ -36,13 +43,14 @@ function Home() {
       setId(response.data._id)
     })
   },[])
-
   return (
     <div> Home Page
       <div>Welcome {username}!</div>
       <div className='title' onClick={()=>{navigate(`/profile/${_id}`)}}>Click here to go to your profile page</div>
+      <div><h3>Trending Sports</h3>
+      </div>
       <div>
-        <h3>Sports available</h3>
+        <h3>Sports available (Sorted Alphabetically for Quick Searching)</h3>
         {Sportsarr.map((value, key)=>{
           return (
           <div className='post'>
